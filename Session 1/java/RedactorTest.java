@@ -14,7 +14,7 @@ public class RedactorTest {
 
     @Test
     public void testFlamingoAndEagle() {
-        String sentence = "The Press Secretary's codename is Flamingo";
+        String sentence = "Flamingo and Eagle are meeting at 11:00";
         List<String> badwords = Arrays.asList("flamingo", "eagle");
         assertEquals("**** and **** are meeting at 11:00", Redactor.redact(sentence, badwords));
     }
@@ -22,7 +22,7 @@ public class RedactorTest {
 
     @Test
     public void testTwoFlamingos() {
-        String sentence = "The Press Secretary's codename is Flamingo";
+        String sentence = "Flamingo hates that her codename is Flamingo";
         List<String> badwords = Arrays.asList("flamingo", "eagle");
         assertEquals("**** hates that her codename is ****", Redactor.redact(sentence, badwords));
     }
