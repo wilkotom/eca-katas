@@ -6,15 +6,17 @@ def fibonacci(n):
     return prev_numbers[0]
 
 def fibonacci(n):
-    o = 0
+    
     def fib():
         a, b = 0, 1
         while True:
             yield a
             a, b = b, a + b
     
+    o = 0
+    f = fib()
     for i in range (n+1):
-        o = fib.next()
+        o = f.next()
     return o
  
 def fibonacci(n):
@@ -51,11 +53,11 @@ def fibonacci(n, fibs=[0, 1]):
         return fibonacci(n, fibs)
  
  
-def fibonacci(n, fibs=(0, 1):
-    if n <=0:
+def fibonacci(n, fibs=(0, 1)):
+    if n <= 0:
         return fibs[0]
     else:
-        return fibonacci(n-1, (fibs[1], fibs[0]+ fibs[1]))
+        return fibonacci(n - 1, (fibs[1], fibs[0]+ fibs[1]))
 
 
 from functools import lru_cache

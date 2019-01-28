@@ -18,15 +18,15 @@ public class Fibonacci {
     }
 
     public static BigInteger fibonacci(long n) {
-        return fib(n, BigInteger.ZERO, BigInteger.ONE);
+        return fibonacci(n, BigInteger.ZERO, BigInteger.ONE);
     }
 
-    private static BigInteger fib(long n, BigInteger a, BigInteger b) {
+    private static BigInteger fibonacci(long n, BigInteger a, BigInteger b) {
         if (n <= 0){
             return a;
         }
         else {
-            return fib(n -1, b, a.add(b));
+            return fibonacci(n -1, b, a.add(b));
         }
     }
 
