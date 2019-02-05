@@ -6,7 +6,20 @@ public class PreT9Decoder {
 
     public static String decode(String keypresses) {
         Map<String,String> lookUpTable = lookUpTable();
-        return "This is not the message you are looking for";
+        String lastPress = "";
+        int counter = 0;
+        String output = "";
+        for (String keypress: keypresses.split("")) {
+            if ( !keypress.equals(lastPress)) {
+                counter = counter % lookUpTable.get(lastPress).length();
+                output = output + lookUpTable.get(lastPress).charAt(counter);
+                counter = 0;
+            }
+            else {
+                counter++;
+            }
+        }
+        return output;
     }
 
 
