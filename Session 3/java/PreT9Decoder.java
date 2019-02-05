@@ -5,26 +5,33 @@ import java.util.Map;
 public class PreT9Decoder {
 
     public static String decode(String keypresses) {
-        Map<String,String> lookUpTable = lookUpTable();
+        Map<String, String> lookUpTable = lookUpTable();
         String lastPress = "";
         int counter = 0;
         String output = "";
-        for (String keypress: keypresses.split("")) {
-            if ( !keypress.equals(lastPress)) {
-                counter = counter % lookUpTable.get(lastPress).length();
-                output = output + lookUpTable.get(lastPress).charAt(counter);
+        if (keypresses.equals(output)) {
+            return keypresses;
+        }
+        for (String keypress : keypresses.split("")) {
+            if (!keypress.equals(lastPress)) {
+                if (lookUpTable.get(lastPress).length() > 0) {
+                    counter = counter % lookUpTable.get(lastPress).length();
+                    output = output + lookUpTable.get(lastPress).charAt(counter);
+                }
                 counter = 0;
-            }
-            else {
+            } else {
                 counter++;
             }
+
+            lastPress = keypress;
         }
+        output = output + lookUpTable.get(lastPress).charAt(counter);
         return output;
     }
 
 
     private static Map<String, String> lookUpTable() {
-        Map<String,String> lookups = new HashMap<String,String>();
+        Map<String, String> lookups = new HashMap<String, String>();
         lookups.put("1", "1");
         lookups.put("2", "ABC2");
         lookups.put("3", "DEF3");
@@ -36,6 +43,7 @@ public class PreT9Decoder {
         lookups.put("9", "WXYZ9");
         lookups.put("0", " 0");
         lookups.put("", "");
+        lookups.put(" ", "");
         return lookups;
     }
 
