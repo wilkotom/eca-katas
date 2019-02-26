@@ -8,7 +8,6 @@ public class Palindrome {
           .replaceAll("\\.", "")
           .replaceAll("[^A-Za-z0-9]+", "")
           .toLowerCase();
-        System.out.println(sentence);
         if (sentence.length() == 0) {
             return false;
         }
