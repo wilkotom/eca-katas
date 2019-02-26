@@ -10,7 +10,7 @@ public class Palindrome {
             return false;
         }
         else {
-            for (int i=0; i < ((sentence.length() / 2) -1); i++ ) {
+            for (int i=0; i < ((sentence.length() / 2)); i++ ) {
                 if (sentence.charAt(i) != sentence.charAt(sentence.length() -i -1)) {
                     return false;
                 }
