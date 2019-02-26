@@ -24,7 +24,7 @@ class TestPalindromeVerification(unittest.TestCase):
         self.assertTrue(palindrome('1001N? 1001!'))
 
     def test_nonprint(self):
-        self.assertIs(palindrome('\n1001 = 1001'),True)
+        self.assertIs(palindrome('race\ncar'),True)
 
     def test_emoji(self):
         self.assertIs(palindrome('(.)_(.)'), False)
