@@ -42,7 +42,7 @@ public class PalindromeTest {
 
     @Test
     public void testNonPrint() {
-        String sentence = "\n1001 = 1001";
+        String sentence = "\nrace car";
         assertEquals(true, Palindrome.is_palindrome(sentence));
     }
 

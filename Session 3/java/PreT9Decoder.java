@@ -6,7 +6,7 @@ public class PreT9Decoder {
 
     public static String decode(String keypresses) {
         Map<String, String> lookUpTable = lookUpTable();
-        String lastPress = "";
+        String lastPress = " ";
         int counter = 0;
         String output = "";
         if (keypresses.equals(output)) {
@@ -18,12 +18,12 @@ public class PreT9Decoder {
                     counter = counter % lookUpTable.get(lastPress).length();
                     output = output + lookUpTable.get(lastPress).charAt(counter);
                 }
+                lastPress = keypress;
                 counter = 0;
             } else {
                 counter++;
             }
 
-            lastPress = keypress;
         }
         output = output + lookUpTable.get(lastPress).charAt(counter);
         return output;
@@ -42,7 +42,6 @@ public class PreT9Decoder {
         lookups.put("8", "TUV8");
         lookups.put("9", "WXYZ9");
         lookups.put("0", " 0");
-        lookups.put("", "");
         lookups.put(" ", "");
         return lookups;
     }
