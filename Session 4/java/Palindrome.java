@@ -5,7 +5,6 @@ public class Palindrome {
 
     public static Boolean is_palindrome(String sentence) {
         sentence = sentence
-          .replaceAll("\\.", "")
           .replaceAll("[^A-Za-z0-9]+", "")
           .toLowerCase();
         if (sentence.length() == 0) {
