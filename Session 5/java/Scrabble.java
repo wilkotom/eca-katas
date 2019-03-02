@@ -1,41 +1,94 @@
 import java.lang.String;
-import java.util.Map;
-import java.util.HashMap;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.charset.*;
+import java.util.*;
+import java.util.regex.*;
 
 public class Scrabble {
 
-    public static String score(String sentence) {
-        return null;
+    public static int score(String word) {
+        int score = 0;
+        Map<String, Integer> scores = letterScores();
+        List<String> validWords = new ArrayList<String>();
+        Boolean isValidWord = false; 
+        word = word.toLowerCase();
+        if (word.matches(".*[^a-z].*") || word.length() > 7) {
+            return 0;
+        }
+        try {
+            Scanner inFile = new Scanner(new File("./words.txt"));
+            while(inFile.hasNext()) {
+                String newWord = inFile.nextLine();
+                if (newWord.equals(word)) {
+                    isValidWord = true;
+                    break;
+                }
+            }
+        }
+        catch(FileNotFoundException e) {
+            return 0;
+        }
+        if (!isValidWord) {
+            return 0;
+        }
+        for (String letter : word.split("")) {
+            score += scores.get(letter);
+        }
+        if (word.length() == 7) {
+            score += 50;
+        }
+        return(score);
+    }
+
+    public static int score1(String word) {
+        Map<String, Integer> scores = letterScores();
+        final String cleanWord = word.toLowerCase().replaceAll("[^a-z]+", "");
+        List<String> validWords;
+        try {
+            validWords = Files.readAllLines(new File("./words.txt").toPath(), Charset.defaultCharset());       
+            int score = (cleanWord.length() == word.length() && cleanWord.length() <= 7) ? 
+                Arrays.asList(cleanWord.split("")).stream()
+                .map(x -> scores.get(x))
+                .reduce(0, (x,y) -> x+y) : 0;
+            if (validWords.stream().anyMatch(x -> x.trim().equals(cleanWord))){
+                return(score + ((word.length() == 7) ? 50 : 0));
+            }
+        }
+        catch(Exception e) {
+            // Nasty dirty hack - IOException for File not found, and NullPointerException when input is empty
+        }
+        return 0;
     }
 
     private static Map<String, Integer> letterScores() {
         Map<String, Integer> scores = new HashMap<String, Integer>();
-        scores.put("A", 1);
-        scores.put("B", 3);
-        scores.put("C", 3);
-        scores.put("D", 2);
-        scores.put("E", 1);
-        scores.put("F", 4);
-        scores.put("G", 2);
-        scores.put("H", 4);
-        scores.put("I", 1);
-        scores.put("J", 8);
-        scores.put("K", 5);
-        scores.put("L", 1);
-        scores.put("M", 3);
-        scores.put("N", 1);
-        scores.put("O", 1);
-        scores.put("P", 3);
-        scores.put("Q", 10);
-        scores.put("R", 1);
-        scores.put("S", 1);
-        scores.put("T", 1);
-        scores.put("U", 1);
-        scores.put("V", 4);
-        scores.put("W", 4);
-        scores.put("X", 8);
-        scores.put("Y", 4);
-        scores.put("Z", 10);
+        scores.put("a", 1);
+        scores.put("b", 3);
+        scores.put("c", 3);
+        scores.put("d", 2);
+        scores.put("e", 1);
+        scores.put("f", 4);
+        scores.put("g", 2);
+        scores.put("h", 4);
+        scores.put("i", 1);
+        scores.put("j", 8);
+        scores.put("k", 5);
+        scores.put("l", 1);
+        scores.put("m", 3);
+        scores.put("n", 1);
+        scores.put("o", 1);
+        scores.put("p", 3);
+        scores.put("q", 10);
+        scores.put("r", 1);
+        scores.put("s", 1);
+        scores.put("t", 1);
+        scores.put("u", 1);
+        scores.put("v", 4);
+        scores.put("w", 4);
+        scores.put("x", 8);
+        scores.put("y", 4);
+        scores.put("z", 10);
         return scores;
     }
 }
