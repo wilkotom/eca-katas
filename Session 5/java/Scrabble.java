@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Scrabble {
 
-    public static String score(String sentence) {
+    public static int score(String sentence) {
         return null;
     }
 
