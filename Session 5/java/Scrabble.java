@@ -10,7 +10,6 @@ public class Scrabble {
     public static int score(String word) {
         int score = 0;
         Map<String, Integer> scores = letterScores();
-        List<String> validWords = new ArrayList<String>();
         Boolean isValidWord = false; 
         word = word.toLowerCase();
         if (word.matches(".*[^a-z].*") || word.length() > 7) {
@@ -25,6 +24,7 @@ public class Scrabble {
                     break;
                 }
             }
+            inFile.close();
         }
         catch(FileNotFoundException e) {
             return 0;
@@ -59,6 +59,7 @@ public class Scrabble {
             // Nasty dirty hack - IOException for File not found, and NullPointerException when input is empty
         }
         return 0;
+
     }
 
     private static Map<String, Integer> letterScores() {
