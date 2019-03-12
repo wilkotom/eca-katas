@@ -6,24 +6,24 @@ public class Sudoku {
 
         Set<X> uniqueElements = new HashSet<X>();
         if ( grid.size() != 9) {
-
             return false;
         }
         ArrayList<ArrayList<X>> columns = getColumns(grid);
         ArrayList<ArrayList<X>> threeByThrees = getThreeByThrees(grid);
 
-        grid.addAll(columns);
-        grid.addAll(threeByThrees);
+
         for (ArrayList<X> group: grid) {
             if (group.size() != 9) {
                 return false;
             }
-            else {
-                group.removeIf(Objects::isNull);
-                uniqueElements.addAll(group);
-                if (!validateBlock(group)){
-                    return false;
-                }
+        }
+        grid.addAll(columns);
+        grid.addAll(threeByThrees);
+        for (ArrayList<X> group: grid) {
+            group.removeIf(Objects::isNull);
+            uniqueElements.addAll(group);
+            if (!validateBlock(group)){
+                return false;
             }
         }
 
