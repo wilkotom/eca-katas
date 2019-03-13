@@ -11,13 +11,12 @@ public class Sudoku {
         if ( grid.size() != 9) {
             return false;
         }
-
         for (ArrayList<X> group: grid) {
             if (group.size() != 9) {
                 return false;
             }
         }
-        
+
         grid.addAll(columns);
         grid.addAll(threeByThrees);
         for (ArrayList<X> group: grid) {
@@ -31,7 +30,6 @@ public class Sudoku {
         if (uniqueElements.size() > 9){
             return false;
         }
-
 
         return true;
     }
@@ -66,7 +64,6 @@ public class Sudoku {
                 }
                 subgrids.add(subGrid);
             }
-            
         }
         return subgrids;
     }
