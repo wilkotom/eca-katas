@@ -5,18 +5,19 @@ public class Sudoku {
     public static <X> Boolean validate(ArrayList<ArrayList<X>> grid) {
 
         Set<X> uniqueElements = new HashSet<X>();
+        ArrayList<ArrayList<X>> columns = getColumns(grid);
+        ArrayList<ArrayList<X>> threeByThrees = getThreeByThrees(grid);
+        
         if ( grid.size() != 9) {
             return false;
         }
-        ArrayList<ArrayList<X>> columns = getColumns(grid);
-        ArrayList<ArrayList<X>> threeByThrees = getThreeByThrees(grid);
-
 
         for (ArrayList<X> group: grid) {
             if (group.size() != 9) {
                 return false;
             }
         }
+        
         grid.addAll(columns);
         grid.addAll(threeByThrees);
         for (ArrayList<X> group: grid) {
@@ -54,25 +55,17 @@ public class Sudoku {
 
     private static <X> ArrayList<ArrayList<X>> getThreeByThrees(ArrayList<ArrayList<X>> grid) {
         ArrayList<ArrayList<X>> subgrids = new ArrayList<ArrayList<X>>();
-        int line=0;
-        for (int i=0; i<grid.size(); i+=3){
-            ArrayList<X> gridOne = new ArrayList<X>();
-            ArrayList<X> gridTwo = new ArrayList<X>();
-            ArrayList<X> gridThree = new ArrayList<X>();
-            for (int j=0; j <3; j++){
-                gridOne.add(grid.get(i).get(j));
-                gridOne.add(grid.get(i+1).get(j));
-                gridOne.add(grid.get(i+2).get(j));
-                gridTwo.add(grid.get(i).get(j+3));
-                gridTwo.add(grid.get(i+1).get(j+3));
-                gridTwo.add(grid.get(i+2).get(j+3));
-                gridThree.add(grid.get(i).get(j+6));
-                gridThree.add(grid.get(i+1).get(j+6));
-                gridThree.add(grid.get(i+2).get(j+6));
+        for (int startRow=0; startRow<grid.size(); startRow+=3){           
+            for (int offset=0; offset<9; offset +=3){
+                ArrayList<X> subGrid = new ArrayList<X>();
+                for (int column=0; column<3; column++) {
+                    subGrid.add(grid.get(startRow).get(column+offset));
+                    subGrid.add(grid.get(startRow+1).get(column+offset));
+                    subGrid.add(grid.get(startRow+2).get(column+offset));
+                }
+                subgrids.add(subGrid);
             }
-            subgrids.add(gridOne);
-            subgrids.add(gridTwo);
-            subgrids.add(gridThree);
+            
         }
         return subgrids;
     }
