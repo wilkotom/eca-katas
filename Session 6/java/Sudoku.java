@@ -5,8 +5,6 @@ public class Sudoku {
     public static <X> Boolean validate(ArrayList<ArrayList<X>> grid) {
 
         Set<X> uniqueElements = new HashSet<X>();
-        ArrayList<ArrayList<X>> columns = getColumns(grid);
-        ArrayList<ArrayList<X>> threeByThrees = getThreeByThrees(grid);
         
         if ( grid.size() != 9) {
             return false;
@@ -17,8 +15,8 @@ public class Sudoku {
             }
         }
 
-        grid.addAll(columns);
-        grid.addAll(threeByThrees);
+        grid.addAll(getColumns(grid));
+        grid.addAll(getThreeByThrees(grid));
         for (ArrayList<X> group: grid) {
             group.removeIf(Objects::isNull);
             uniqueElements.addAll(group);
