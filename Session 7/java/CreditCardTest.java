@@ -12,7 +12,7 @@ public class CreditCardTest {
 
     @Test
     public void testZero() {
-        assertEquals(false, CreditCard.validate("0"));
+        assertEquals(true, CreditCard.validate("0"));
     }
 
     @Test
