@@ -1,6 +1,6 @@
 public class CreditCard {
 
-    public static <X> Boolean validate(String ccnum) {
+    public static Boolean validate(String ccnum) {
         int total = 0;
         char[] digits = ccnum.toCharArray();
         for(int pos = digits.length-1; pos>=0; pos-=2) {
