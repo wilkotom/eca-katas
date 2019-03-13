@@ -56,12 +56,13 @@ public class Sudoku {
     private static <X> ArrayList<ArrayList<X>> getThreeByThrees(ArrayList<ArrayList<X>> grid) {
         ArrayList<ArrayList<X>> subgrids = new ArrayList<ArrayList<X>>();
         for (int startRow=0; startRow<grid.size(); startRow+=3){           
-            for (int offset=0; offset<9; offset +=3){
+            for (int offsetColumn=0; offsetColumn<9; offsetColumn +=3){
                 ArrayList<X> subGrid = new ArrayList<X>();
                 for (int column=0; column<3; column++) {
-                    subGrid.add(grid.get(startRow).get(column+offset));
-                    subGrid.add(grid.get(startRow+1).get(column+offset));
-                    subGrid.add(grid.get(startRow+2).get(column+offset));
+                    for (int offsetRow=0; offsetRow<3; offsetRow++) {
+                        subGrid.add(grid.get(startRow+offsetRow)
+                            .get(column+offsetColumn));
+                    }
                 }
                 subgrids.add(subGrid);
             }
