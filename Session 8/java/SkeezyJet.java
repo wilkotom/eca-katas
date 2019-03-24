@@ -2,12 +2,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class SkeezyJet {
 
     public static Boolean reachableDestination(String origin, String destination) {
-        Map<String,ArrayList<String>> routeTable = validRoutes();
-        return null;
+        Map<String,ArrayList<String>> routes = validRoutes();
+        int discoveredRouteCount = 0;
+        Set<String> validDestinations = new HashSet<String>();
+        if (routes.containsKey(origin)) {
+            validDestinations.addAll(routes.get(origin));
+            while (discoveredRouteCount != validDestinations.size()) {
+                discoveredRouteCount = validDestinations.size();
+                ArrayList<String> discoveredDestinations = new ArrayList<>();
+                for (String dest: validDestinations) {
+                    discoveredDestinations.addAll(routes.get(dest));
+                }
+                validDestinations.addAll(discoveredDestinations);
+            }
+            if (validDestinations.contains(destination)) return true;
+        }
+        return false;
     }
 
     private static Map<String,ArrayList<String>> validRoutes() {
