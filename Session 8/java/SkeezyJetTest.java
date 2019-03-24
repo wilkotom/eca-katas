@@ -58,12 +58,12 @@ public class SkeezyJetTest {
 
     @Test
     public void testSeattleManchester() {
-        assertEquals(false, SkeezyJet.reachableDestination("SEA","MAN"));
+        assertEquals(true, SkeezyJet.reachableDestination("SEA","MAN"));
     }
 
     @Test
     public void testManchesterLunarCitySeven() {
-        assertEquals(false, SkeezyJet.reachableDestination("MAN", "LC7"));
+        assertEquals(true, SkeezyJet.reachableDestination("MAN", "LC7"));
     }
   
 }
