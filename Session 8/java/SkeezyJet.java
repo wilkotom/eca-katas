@@ -17,14 +17,37 @@ public class SkeezyJet {
                 discoveredRouteCount = validDestinations.size();
                 ArrayList<String> discoveredDestinations = new ArrayList<>();
                 for (String dest: validDestinations) {
-                    if (routes.containsKey(dest)) {
-                        discoveredDestinations.addAll(routes.get(dest));
-                        routes.remove(dest);
-                    }
+                    discoveredDestinations.addAll(routes.get(dest));
                 }
                 validDestinations.addAll(discoveredDestinations);
             }
             if (validDestinations.contains(destination)) return true;
+        }
+        return false;
+    }
+
+    public static Boolean optimisedReachableDestination(String origin, String destination) {
+        Map<String,ArrayList<String>> routes = validRoutes();
+        int discoveredRouteCount = 0;
+        Set<String> validDestinations = new HashSet<String>();
+        if (routes.containsKey(origin)) {
+            validDestinations.addAll(routes.get(origin));
+            while (discoveredRouteCount != validDestinations.size()) {
+                discoveredRouteCount = validDestinations.size();
+                ArrayList<String> discoveredDestinations = new ArrayList<>();
+                for (String dest: validDestinations) {
+                    if (routes.containsKey(dest)){
+                        if (routes.get(dest).contains(destination)) {
+                            return true;
+                        }
+                        else {
+                            discoveredDestinations.addAll(routes.get(dest));
+                            routes.remove(dest);
+                        }
+                    }
+                }
+                validDestinations.addAll(discoveredDestinations);
+            }
         }
         return false;
     }
