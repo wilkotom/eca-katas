@@ -17,7 +17,10 @@ public class SkeezyJet {
                 discoveredRouteCount = validDestinations.size();
                 ArrayList<String> discoveredDestinations = new ArrayList<>();
                 for (String dest: validDestinations) {
-                    discoveredDestinations.addAll(routes.get(dest));
+                    if (routes.containsKey(dest)) {
+                        discoveredDestinations.addAll(routes.get(dest));
+                        routes.remove(dest);
+                    }
                 }
                 validDestinations.addAll(discoveredDestinations);
             }
